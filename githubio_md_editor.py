@@ -1,4 +1,5 @@
 import browser
+browser.document["debug-print"].text = "LOADING NOW....."
 from browser import timer
 from browser import ajax, window, load
 from javascript import JSConstructor, JSObject
@@ -96,8 +97,7 @@ def markdown_change(ev):
     debug_print("inpt")
     print(browser.document.cookie)
     draw_markdown()
-
-    # window.download_md(get_md())
+    window.download_md(get_md())
     # browser.document["markdown-code"].text = browser.document["markdown-input"].value
     debug_print("done")
 
@@ -114,3 +114,5 @@ def markdown_change(ev):
 
 browser.document["markdown-change"].bind("click", markdown_change)
 browser.document["markdown-input"].value = JSObject(window.decodeURIComponent)(get_cookie("markdown"))
+browser.document["debug-print"].text = "LOADINNG DONE!"
+
