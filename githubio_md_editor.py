@@ -1,7 +1,7 @@
 import browser
 from browser import timer
 from browser import ajax, window, load
-from javascript import JSConstructor,JSObject
+from javascript import JSConstructor, JSObject
 from browser import markdown
 
 # load("save_md.js")
@@ -26,7 +26,8 @@ public void test(View v){
 }
 ```
 """
-browser.document["markdown-input"].value = test_md
+# browser.document["markdown-input"].value = test_md
+
 
 # browser.document.open()
 # browser.document.write("hello")
@@ -52,8 +53,10 @@ browser.document["markdown-input"].value = test_md
 def debug_print(string):
     browser.document["debug-print"].text += "\n\n***" + str(string) + "***\n\n"
 
+
 def get_md():
     return browser.document["markdown-input"].value
+
 
 def ganbattazolo():
     # a = browser.document.createElement("A")
@@ -71,21 +74,34 @@ def ganbattazolo():
     pass
 
 
+def get_cookie(arg):
+    cookies = browser.document.cookie.split(";")
+    print("cookies:",cookies)
+    for item in cookies:
+        sp = item.split("=")
+        if sp[0].strip() == arg:
+            return sp[1]
+
+
 def draw_markdown():
     # mk, scripts = markdown.mark(get_md())
     mk = window.marked(get_md())
     browser.document["markdown-result"].html = mk
+    encodeURIComponent = JSObject(window.encodeURIComponent)
+    browser.document.cookie = "markdown={md}".format(md=encodeURIComponent(get_md()))
 timer.set_interval(draw_markdown, 100)
+
 
 def markdown_change(ev):
     debug_print("inpt")
+    print(browser.document.cookie)
     draw_markdown()
+
     # window.download_md(get_md())
     # browser.document["markdown-code"].text = browser.document["markdown-input"].value
     debug_print("done")
 
 
-browser.document["markdown-change"].bind("click", markdown_change)
 
 # import time
 # index = 0
@@ -95,3 +111,6 @@ browser.document["markdown-change"].bind("click", markdown_change)
 #     browser.document["debug-print"].text = str(index)
 #
 # timer.set_interval(test_timer, 10)
+
+browser.document["markdown-change"].bind("click", markdown_change)
+browser.document["markdown-input"].value = JSObject(window.decodeURIComponent)(get_cookie("markdown"))
