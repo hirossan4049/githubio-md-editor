@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Github.io Markdown Editor</title>
+        <script src="https://cdn.rawgit.com/brython-dev/brython/3.8.9/www/src/brython.js"></script>
+        <script src="https://cdn.rawgit.com/brython-dev/brython/3.8.9/www/src/brython_stdlib.js"></script>
+<!--    <script src="brython.js"></script>-->
+<!--    <script src="brython_stdlib.js"></script>-->
+    <script src="save_md.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body onload="brython()">
+<script type="text/python" src="githubio_md_editor.py"></script>
+
+<div id="debug-print"></div>
+<textarea id="markdown-input"></textarea>
+<button id="markdown-change">save_md</button>
+<div id="markdown-result">
+</div>
+
+
+<!--<label id="markdown-code" >helloworldowlreinifne</label>-->
+
+
+<!--どうしてもBrythonでのやり方わからなかった...許してくれ....-->
+<!--<a href="#" id="link2" onclick="func2()">Download</a><br>-->
+<!--<script language="javascript" type="text/javascript">-->
+<!--    let text = document.getElementById("markdown-code").textContent-->
+<!--    function func2() {-->
+<!--        var blob = new Blob(-->
+<!--            [text],-->
+<!--            {"type": "text/plain"})-->
+<!--        let link = document.createElement('a')-->
+<!--        link.href = window.URL.createObjectURL(blob)-->
+<!--        link.download = 'markdown.md'-->
+<!--        link.click()-->
+<!--    }-->
+<!--</script>-->
+
+</body>
+</html>
